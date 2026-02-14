@@ -1,74 +1,182 @@
 # BMObot Claude Code Skills
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-7C3AED)](https://code.claude.com/docs/en/plugins)
+[![Skills](https://img.shields.io/badge/Skills-5%20Free-00D4AA)](skills/)
+
 Production-tested skills for professional development workflows. Built from daily real-world use building multi-agent AI systems.
-
-## Free Skills (5)
-
-### PR Workflow Pack
-
-Three skills covering your entire pull request workflow:
-
-| Skill | What it does |
-|-------|-------------|
-| **smart-review** | Thorough code review organized by severity — catches bugs, security issues, and edge cases |
-| **smart-commit** | Generates clear, conventional commit messages from your staged changes |
-| **smart-pr** | Creates comprehensive PR descriptions with categorized changes and testing checklists |
-
-**Workflow**: `smart-review` → `smart-commit` → `smart-pr` → Merge
-
-### Dev Toolkit
-
-Structured development and context management:
-
-| Skill | What it does |
-|-------|-------------|
-| **spec-driven-dev** | Specify → Plan → Review → Build workflow with test contracts and devil's advocate review |
-| **context-manager** | Track context usage, save state, and restore seamlessly after restart |
 
 ## Install
 
-Copy skills to your Claude Code skills directory:
+**As a plugin** (recommended):
 
 ```bash
-# Clone this repo
+claude /plugin install RockaRhymeLLC/claude-code-skills
+```
+
+**Or copy skills directly:**
+
+```bash
 git clone https://github.com/RockaRhymeLLC/claude-code-skills.git
-
-# Install all free skills
 cp -r claude-code-skills/skills/* ~/.claude/skills/
-
-# Or install individually
-cp -r claude-code-skills/skills/smart-review ~/.claude/skills/smart-review/
 ```
 
-Or add as a Claude Code plugin marketplace:
+## Skills
+
+### smart-review
+
+Thorough code review organized by severity — catches bugs, security issues, and edge cases that slip past manual review.
+
+<details>
+<summary>Example output</summary>
 
 ```
-/plugin marketplace add RockaRhymeLLC/claude-code-skills
+## Critical (1)
+
+### SQL Injection in user search
+src/routes/users.ts:42
+
+The `searchQuery` parameter is interpolated directly into the SQL string.
+An attacker could pass `'; DROP TABLE users; --` to destroy data.
+
+Fix: Use parameterized queries.
+- const results = db.query(`SELECT * FROM users WHERE name = '${searchQuery}'`);
++ const results = db.query('SELECT * FROM users WHERE name = $1', [searchQuery]);
+
+## Warning (2)
+
+### Missing null check on API response
+src/services/payment.ts:88
+
+`response.data.transaction` is accessed without checking if `response.data`
+exists. If the payment API returns an error shape, this throws TypeError.
+
+### Unbounded array growth in event listener
+src/core/events.ts:23
+
+Events are pushed to `this.history` but never pruned. In long-running
+processes, this causes memory growth proportional to uptime.
+
+## Suggestion (1)
+
+### Consider extracting validation logic
+src/routes/auth.ts:15-45
+
+The email/password validation block is 30 lines and duplicated in the
+registration endpoint. Extract to a shared `validateCredentials()` helper.
+```
+
+</details>
+
+### smart-commit
+
+Generates clear, conventional commit messages from staged changes. Analyzes diffs to explain *why*, not just *what*.
+
+<details>
+<summary>Example output</summary>
+
+```
+feat(auth): add OAuth2 login with Google provider
+
+- Add Google OAuth strategy with PKCE flow
+- Create session management middleware with secure cookie config
+- Add user profile sync on first login
+- Include rate limiting on auth endpoints (10 req/min)
+
+Breaking change: SESSION_SECRET env var is now required
+```
+
+</details>
+
+### smart-pr
+
+Creates comprehensive PR descriptions with categorized changes, testing notes, and reviewer guidance.
+
+<details>
+<summary>Example output</summary>
+
+```markdown
+## Summary
+Add Google OAuth2 as a login option alongside existing email/password auth.
+Users can now sign in with their Google account in one click.
+
+## Changes
+
+**New Features**
+- Google OAuth2 login flow with PKCE
+- Automatic profile sync (name, avatar) on first Google login
+- "Continue with Google" button on login page
+
+**Infrastructure**
+- Add `passport-google-oauth20` dependency
+- New session middleware with secure cookie defaults
+- Rate limiting on all auth endpoints
+
+## Test Plan
+- [ ] Google login flow works end-to-end
+- [ ] Existing email/password login still works
+- [ ] Session persists across page reloads
+- [ ] Rate limiting triggers after 10 requests
+- [ ] Profile sync pulls correct Google data
+```
+
+</details>
+
+### spec-driven-dev
+
+Full Specify, Plan, Review, Build workflow with test contracts and devil's advocate review. Prevents scope creep and ensures nothing ships without passing tests.
+
+<details>
+<summary>How it works</summary>
+
+```
+/bmobot-skills:spec-dev auth-system
+
+1. SPECIFY  -> Creates detailed spec with requirements and constraints
+2. PLAN     -> Breaks spec into stories with test contracts
+3. REVIEW   -> Devil's advocate agent challenges the plan
+4. BUILD    -> Implements stories one-by-one, running tests after each
+
+Output: specs/auth-system.md, plans/auth-system.md, working code
+```
+
+</details>
+
+### context-manager
+
+Track context usage, save state, and restore seamlessly after restart. Never lose work when your context window fills up.
+
+## PR Workflow
+
+The three PR skills work together as a complete workflow:
+
+```
+Code changes -> smart-review -> smart-commit -> smart-pr -> Merge
+                    |               |              |
+                Fix issues    Clean history   Clear PR description
 ```
 
 ## Pro Skills
 
-Want more? **Claude Code Skills Pro** adds 3 additional skills:
+**[Claude Code Skills Pro](https://bmobot.ai)** adds 3 additional skills for $29:
 
 | Skill | What it does |
 |-------|-------------|
-| **smart-test** | Generates comprehensive test suites — unit tests, edge cases, integration tests, with framework auto-detection |
-| **smart-debug** | Systematic debugging workflow — reproduce, isolate, fix, verify. Includes git bisect and regression testing |
-| **smart-migrate** | Guided framework/library migrations — incremental, tested, reversible at every step |
+| **smart-test** | Generate comprehensive test suites with framework auto-detection |
+| **smart-debug** | Systematic debugging: reproduce, isolate, fix, verify with git bisect |
+| **smart-migrate** | Guided framework migrations — incremental, tested, reversible |
 
-**Get all 8 skills for $29** → [bmobot.ai](https://bmobot.ai)
-
-Pro includes all 5 free skills + 3 pro skills, with ongoing updates and new skills added regularly.
+All 8 skills (5 free + 3 pro) with ongoing updates.
 
 ## Requirements
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
-- Git (all skills)
+- [Claude Code](https://code.claude.com) CLI (v1.0.33+)
+- Git
 
 ## License
 
-MIT (free skills)
+MIT
 
 ---
 
-Built by [BMObot](https://bmobot.ai)
+Built by [BMObot](https://bmobot.ai) — AI agents with human standards.
