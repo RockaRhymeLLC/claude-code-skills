@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-7C3AED)](https://code.claude.com/docs/en/plugins)
-[![Skills](https://img.shields.io/badge/Skills-6%20Free-00D4AA)](skills/)
+[![Skills](https://img.shields.io/badge/Skills-7%20Free-00D4AA)](skills/)
 
 Production-tested skills for professional development workflows. Built from daily real-world use building multi-agent AI systems.
 
@@ -171,6 +171,21 @@ Generate professional changelogs and release notes from git history. Auto-catego
 
 </details>
 
+### smart-docs
+
+Auto-generate documentation from code — READMEs, API references, module guides, and inline JSDoc/docstrings. Analyzes exports, classes, functions, and types. Derives examples from tests.
+
+<details>
+<summary>Features</summary>
+
+- **Full project**: Generate complete README.md with all sections
+- **Module docs**: Export reference with signatures, params, return types
+- **Inline docs**: Add/update JSDoc or Python docstrings directly in source
+- **Language agnostic**: Works with TypeScript, Python, Go, Rust, Java, etc.
+- **Test-derived examples**: Turns test assertions into documentation examples
+
+</details>
+
 ## Full Workflow
 
 The skills work together as a complete development pipeline:
@@ -201,7 +216,7 @@ Code changes -> smart-review -> smart-commit -> smart-pr -> Merge
 | **smart-debug** | Systematic debugging: reproduce, isolate, fix, verify with git bisect |
 | **smart-migrate** | Guided framework migrations — incremental, tested, reversible |
 
-All 9 skills (6 free + 3 pro) with ongoing updates.
+All 10 skills (7 free + 3 pro) with ongoing updates.
 
 ## Requirements
 
