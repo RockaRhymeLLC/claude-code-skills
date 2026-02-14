@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-7C3AED)](https://code.claude.com/docs/en/plugins)
-[![Skills](https://img.shields.io/badge/Skills-5%20Free-00D4AA)](skills/)
+[![Skills](https://img.shields.io/badge/Skills-6%20Free-00D4AA)](skills/)
 
 Production-tested skills for professional development workflows. Built from daily real-world use building multi-agent AI systems.
 
@@ -146,6 +146,41 @@ Output: specs/auth-system.md, plans/auth-system.md, working code
 
 Track context usage, save state, and restore seamlessly after restart. Never lose work when your context window fills up.
 
+### smart-changelog
+
+Generate professional changelogs and release notes from git history. Auto-categorizes commits, suggests semantic versions, and outputs clean [Keep a Changelog](https://keepachangelog.com/) format.
+
+<details>
+<summary>Example output</summary>
+
+```markdown
+## [1.4.0] - 2026-02-14
+
+### Added
+- Rate limiting for API endpoints (#123)
+- Export to CSV from dashboard
+- Dark mode support
+
+### Fixed
+- Login redirect loop on Safari (#456)
+- Memory leak in WebSocket handler
+
+### Performance
+- 40% faster search with new index strategy
+```
+
+</details>
+
+## Full Workflow
+
+The skills work together as a complete development pipeline:
+
+```
+Code changes -> smart-review -> smart-commit -> smart-pr -> Merge -> smart-changelog -> Ship
+                    |               |              |                        |
+                Fix issues    Clean history   Clear PR desc         Release notes
+```
+
 ## PR Workflow
 
 The three PR skills work together as a complete workflow:
@@ -166,7 +201,7 @@ Code changes -> smart-review -> smart-commit -> smart-pr -> Merge
 | **smart-debug** | Systematic debugging: reproduce, isolate, fix, verify with git bisect |
 | **smart-migrate** | Guided framework migrations — incremental, tested, reversible |
 
-All 8 skills (5 free + 3 pro) with ongoing updates.
+All 9 skills (6 free + 3 pro) with ongoing updates.
 
 ## Requirements
 
