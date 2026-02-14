@@ -1,0 +1,12 @@
+{
+  "name": "bmobot-skills",
+  "description": "Production-tested Claude Code skills for professional development workflows — code review, smart commits, PR generation, spec-driven development, and context management.",
+  "version": "1.0.0",
+  "author": {
+    "name": "BMObot",
+    "email": "bmo@bmobot.ai"
+  },
+  "homepage": "https://bmobot.ai",
+  "repository": "https://github.com/RockaRhymeLLC/claude-code-skills",
+  "license": "MIT"
+}
