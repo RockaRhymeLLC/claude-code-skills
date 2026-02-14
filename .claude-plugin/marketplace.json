@@ -1,0 +1,34 @@
+{
+  "name": "bmobot-skills",
+  "owner": {
+    "name": "bmobot",
+    "email": "bmo@bmobot.ai"
+  },
+  "metadata": {
+    "description": "Production-tested Claude Code skills for professional development workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "pr-workflow-pack",
+      "description": "Three skills covering your entire PR workflow: code review, commit messages, and PR descriptions",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/smart-review",
+        "./skills/smart-commit",
+        "./skills/smart-pr"
+      ]
+    },
+    {
+      "name": "dev-toolkit",
+      "description": "Structured development workflow (spec-plan-review-build) and context window management",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/spec-driven-dev",
+        "./skills/context-manager"
+      ]
+    }
+  ]
+}
